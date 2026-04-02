@@ -1,8 +1,8 @@
 # [Memo Title]
 
-**Created by:** [name]  
-**Updated by:** [name]  
-**Date Created:** [date]  
+**Created by:** Adam W Stauffer
+**Updated by:** Mia Elin Herradura 
+**Date Created:** 04/02/2026
 **Date Updated:** [date]  
 **Version:** [0.0]
 **LLM Used:** [LLM name, or "None"]
