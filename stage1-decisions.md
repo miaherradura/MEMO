@@ -46,30 +46,44 @@ Support accurate financial forecasting and budgeting
 *1) Exposure Definition*
 
 Currency: EUR/USD
+
 Amount: $20,000,000
+
 Timing: 1 year
 
 *2) Risk Analysis*
 
 Downside risk: EUR depreciation reduces USD proceeds
+
 Volatility introduces earnings uncertainty
 
 *3) Hedging Strategies Evaluated*
 
-Forward Contract
+**Forward Contract**
+
 Pros: Eliminates uncertainty, locks in rate (1.0935)
+
 Cons: No upside potential
+
 Currency Options
+
 EUR Put (premium: $0.019): Downside protection + upside participation
+
 EUR Call (premium: $0.024): Upside only (less relevant)
-Natural Hedging
+
+
+**Natural Hedging**
+
 Pros: No direct cost
+
 Cons: Limited feasibility and incomplete coverage
 
 *4) Analytical Approach (Stages 2–4)*
 
 Stage 2: Build Excel model to compare hedge outcomes across FX scenarios
+
 Stage 3: Document model logic and create a scalable technical specification
+
 Stage 4: Use results to select optimal strategy and present recommendation
 
 ---
