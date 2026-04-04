@@ -2,19 +2,14 @@
 
 **Created by:** 
 Adam W Stauffer
-
 **Updated by:** 
 Mia Elin Herradura 
-
 **Date Created:** 
 04/02/2026
-
 **Date Updated:** 
 [04/03/2026]  
-
 **Version:** 
 [0.0]
-
 **LLM Used:** 
 [LLM name, or "None"]
 
