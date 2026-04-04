@@ -1,6 +1,7 @@
 # U.S. Aerospace Manufacturer - Hedging Decision Memo
 
 **Created by:** Adam W Stauffer
+
 **Updated by:** Mia Elin Herradura 
 
 **Date Created:** 04/02/2026
