@@ -12,7 +12,6 @@
 
 **LLM Used:** 
 [ChatGPT]
-
 ---
 
 **Executive Summary**
