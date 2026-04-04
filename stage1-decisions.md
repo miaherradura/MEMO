@@ -1,14 +1,14 @@
 # U.S. Aerospace Manufacturer - Hedging Decision Memo
 
 **Created by:** Adam W Stauffer
-  **Updated by:** Mia Elin Herradura 
-  **Date Created:** 04/02/2026
-  **Date Updated:** [04/03/2026]  
-  **Version:** [5.3]
-  **LLM Used:** [ChatGPT]
+**Updated by:** Mia Elin Herradura 
+**Date Created:** 04/02/2026
+**Date Updated:** [04/03/2026]  
+**Version:** [5.3]
+**LLM Used:** [ChatGPT]
 
 **TO:** Chief Financial Officer
-  **SUBJECT:** FX Risk Management Proposal – EUR/USD Exposure
+**SUBJECT:** FX Risk Management Proposal – EUR/USD Exposure
 
 ---
 
