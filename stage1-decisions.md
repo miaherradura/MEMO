@@ -7,6 +7,7 @@
 **Version:** [5.3]
 **LLM Used:** [ChatGPT]
 
+
 **TO:** Chief Financial Officer
 **SUBJECT:** FX Risk Management Proposal – EUR/USD Exposure
 
