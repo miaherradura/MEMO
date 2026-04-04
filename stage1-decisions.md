@@ -13,7 +13,6 @@
 ---
 
 **Executive Summary**
-
 We are exposed to foreign exchange risk from a €-denominated receivable equivalent to $20,000,000 due in one year. If the euro depreciates against the U.S. dollar, our realized USD revenue will decline, creating earnings volatility. To manage this risk, we evaluated three hedging approaches: forward contracts, currency options, and natural hedging. Our preliminary recommendation is to use a EUR put option, which protects against downside risk while preserving upside potential if the euro strengthens. Alternatively, a forward contract at 1.0935 provides full certainty. We will validate this recommendation through an Excel-based scenario model and present a final strategy aligned with the firm’s risk tolerance and financial goals.
 
 ---
