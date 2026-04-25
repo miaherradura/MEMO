@@ -1,14 +1,14 @@
 # Scenario 4 – U.S. Aerospace Manufacturer | FX Hedge Technical Specification
 
-**Created by:** [Name]
-**Updated by:** [Name]
+**Created by:** [Adam Stauffer]
+**Updated by:** [Mia Herradura]
 **Date Created:** April 24, 2026
 **Date Updated:** April 24, 2026
 **Version:** 1.0
 **LLM Used:** Claude Sonnet 4.6 (Anthropic)
 
-**Role:** Financial Analyst / Treasury Analyst
-**Audience:** CFO or Director of Treasury
+**To:** CFO or Director of Treasury
+**From:** Financial Analyst / Treasury Analyst
 
 **Purpose:** Provide a professional, quantitative specification outlining the analytical structure for evaluating FX hedging alternatives for a USD-denominated aerospace exporter with a EUR receivable.
 
@@ -141,12 +141,3 @@ Additional sensitivities to consider (optional extensions):
 
 ---
 
-## Appendix: How This Specification Feeds Later Stages
-
-| Stage | What This Specification Enables |
-|---|---|
-| **Stage 2 – Excel Build** | Each Input variable maps to a named cell or range. Each Output becomes a computed cell or chart. |
-| **Stage 3 – Model Review** | Spec documents the constructed model, articulates design choices, and flags areas for improvement. |
-| **Stage 4 – AI-Assisted Analysis** | Calculation Flow becomes the AI prompt instruction block; Outputs drive interpretation and recommendation. |
-
-> Treat this specification as the bridge between business insight and technical execution. The CFO should be confident the plan is sound even before seeing the numbers — and the model builder should be able to implement it without asking a single follow-up question.
