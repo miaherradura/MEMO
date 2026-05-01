@@ -165,7 +165,7 @@ Do not invent alternative names.
 
 ---
 
-## Extra Credit: Areas for Further Study
+## **Extra Credit: Areas for Further Study**
 
 ### 1. AI Skills & Automation
 
