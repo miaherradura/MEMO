@@ -7,7 +7,7 @@
 | **FROM** | Mia Herradura, Financial Analyst |
 | **DATE** | May 1, 2026 |
 | **RE** | FX Hedge Strategy — EUR 16,987,302 Aerospace Receivable (12-Month Horizon) |
-| **CONTEXT** | Stage 2 Model · Stage 3 Spec · Scenario 4 |
+| **LLM** | Claude Sonnet 4.6 (Anthropic) |
 
 ---
 
