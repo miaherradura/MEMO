@@ -174,9 +174,11 @@ The structured prompt in Section F represents only the first layer of AI-driven 
 
 Claude Skills, in particular, could be configured to act as a treasury assistant: given the Stage 3 spec and current market data, it could regenerate the Excel model, interpret the sensitivity table, draft an updated memo, and flag CIP parity violations — reducing analyst preparation time from hours to minutes.
 
-### 2. Multi-File Reasoning & GitHub Version Control
+### 2. Multi-File Reasoning 
 
 Committing all three stage deliverables — Stage 3 spec (`.md`), Stage 2 model (`.xlsx`), and Stage 4 memo (`.md`) — to a GitHub repository creates a complete, auditable, and reproducible hedge analysis pipeline. An AI assistant with repository access can perform multi-file reasoning: verifying that named ranges in the Excel model match those defined in the Stage 3 spec, or confirming that the Stage 4 recommendation is consistent with Stage 2 outputs. This cross-file consistency check is especially valuable in large organizations where specs, models, and memos are maintained by different teams across different time periods.
+
+### 3. GitHub Version Control
 
 From an accounting and audit perspective, GitHub commits provide timestamped version history — directly addressing ASC 815 documentation requirements for hedge accounting designation, which must occur at inception and be contemporaneously documented. Each commit becomes an immutable record of what the analyst knew, when they knew it, and what decision was supported by the data at that time, serving as audit-ready evidence in a hedge effectiveness review.
 
