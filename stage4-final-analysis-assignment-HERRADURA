@@ -1,181 +1,186 @@
-# 📄 FX Hedging Recommendation Memo  
-## Scenario 4 – U.S. Aerospace Manufacturer  
+# Stage 4 – Final Analysis & Recommendation
+## FX Hedge Strategy Memo — Scenario 4: U.S. Aerospace Manufacturer
 
-**Prepared by:** Mia Herradura  
-**Role:** Treasury Analyst  
-**Date:** May 2026  
-
----
-
-## A. Exposure Summary  
-
-The company expects to receive **EUR 20,000,000 in 12 months** from a European aerospace contract. This creates foreign exchange risk because the firm reports in USD.
-
-- **Position:** Long EUR (receivable)  
-- **Risk:** EUR depreciation reduces USD proceeds  
-- **Horizon:** 1 year  
-- **Forward Rate:** 1.0935 USD/EUR  
-
-If the euro weakens, the USD value of the receivable declines, impacting revenue, budgeting, and earnings stability.
+| Field | Detail |
+|---|---|
+| **TO** | CFO / Director of Treasury — U.S. Aerospace Manufacturer |
+| **FROM** | Mia Herradura, Financial Analyst |
+| **DATE** | May 1, 2026 |
+| **RE** | FX Hedge Strategy — EUR 16,987,302 Aerospace Receivable (12-Month Horizon) |
+| **CONTEXT** | Stage 2 Model · Stage 3 Spec · Scenario 4 |
 
 ---
 
-## B. Summary of Hedge Outcomes  
+## A. Exposure Summary
 
-### Forward Hedge  
-Locks in a fixed rate:
+Our aerospace division has contracted to deliver a major component assembly to a European client, generating a **EUR 16,987,302 receivable due in 12 months**. Because our reporting currency is USD, this creates a meaningful foreign exchange exposure: every 1-cent move in the EURUSD rate produces approximately **$169,873 in gain or loss** on the receivable.
 
-- **USD Proceeds = 20,000,000 × 1.0935 = $21,870,000**
+As a U.S. exporter receiving Euros, we are naturally **long EUR**. The primary risk is EUR depreciation relative to the USD — if the euro weakens, our USD proceeds fall below plan. Conversely, EUR appreciation would increase proceeds, representing upside optionality. The hedging decision centers on the cost-benefit trade-off between locking in certainty (forward/money market) and preserving upside potential (put option).
 
-**Takeaway:**  
-- Full protection  
-- No cost  
-- No upside  
-
----
-
-### Money Market Hedge  
-Synthetic forward using borrowing and investing.
-
-**Result:**  
-- Matches forward hedge outcome (CIP holds)
-
-**Takeaway:**  
-- Economically identical to forward  
-- Less practical (requires borrowing)
+| Parameter | Value | Source |
+|---|---|---|
+| Receivable (`FC_AMT`) | EUR 16,987,302 | Company / Stage 2 Model |
+| Spot Rate (`S0`) | 1.7650 USD/EUR | Stage 2 Model Input |
+| Forward Rate (`F0`) | 1.0935 USD/EUR | Scenario Provided |
+| USD Interest Rate (`R_USD`) | 3.67% | Stage 2 Model Input |
+| EUR Interest Rate (`R_FC`) | 3.691% | Stage 2 Model Input |
+| Put Premium (`PREM_PUT`) | $0.019 per EUR | Scenario Provided |
+| Time Horizon (`T`) | 12 months (1.0 year) | Scenario Provided |
 
 ---
 
-### Put Option Hedge (EUR Put)  
+## B. Summary of Hedge Outcomes
 
-- Premium: 0.019 USD/EUR  
-- Total Cost: **$380,000**
+The table below presents USD proceeds under each strategy. The forward hedge provides the certainty benchmark. The money market hedge replicates the forward synthetically via the borrow-convert-invest mechanism; under Covered Interest Parity (CIP), it should converge to the forward result. The divergence observed in Stage 2 reflects the wide gap between the spot rate entered (1.7650) and the forward rate (1.0935) — a data anomaly flagged for correction before CFO presentation. The put option establishes a USD floor while retaining upside if the EUR appreciates.
 
-**Takeaway:**  
-- Provides downside protection  
-- Keeps upside potential  
-- Reduces net proceeds due to premium  
+| Strategy | USD Proceeds | Certainty | Key Trade-Off |
+|---|---|---|---|
+| **1. Forward Hedge** | $18,575,615 | Full — locked-in rate | No upside participation if EUR rises |
+| **2. Money Market Hedge** | $29,848,366 `*` | Full — locked-in via borrow/invest | Liquidity draw; balance sheet impact; CIP anomaly flagged |
+| **3. Put Option Hedge** | ~$22,274,939 (floor) | Partial — floor with upside | Premium cost of $322,759; upside retained above `K_put` |
+| **4. Call Option (Reference)** | Variable — no floor | None — downside fully exposed | Not appropriate as primary hedge for exporter |
+| **5. No Hedge** | Variable (`S_T × FC_AMT`) | None — fully exposed | Maximum risk; budget unpredictability |
 
----
-
-### Call Option (Reference Only)  
-
-**Takeaway:**  
-- Not suitable for this exposure  
+> `*` The Stage 2 money market result of $29,848,366 reflects a spot input of 1.7650 inconsistent with the 1.0935 forward rate. Under correct CIP, money market proceeds should approximate the forward result of **$18,575,615**. This discrepancy should be corrected by aligning `S0` with the current implied spot prior to final CFO presentation.
 
 ---
 
-### No Hedge  
+## C. Sensitivity Analysis & Scenario Interpretation
 
-**Takeaway:**  
-- Highest upside  
-- Highest risk  
+The Stage 2 sensitivity table evaluates USD proceeds as the EUR/USD spot rate at maturity (`S_T`) varies from 1.40 to 1.52. Extrapolating the underlying logic to the ±5% range around the 1.0935 forward (approximately 1.038 to 1.148), the following patterns emerge:
 
----
+### EUR Depreciation Scenarios (`S_T` < 1.0935)
 
-## C. Sensitivity Interpretation  
+When the euro weakens at maturity, the unhedged exporter suffers a direct reduction in USD proceeds — approximately **$169,873 per $0.01 decline** in `S_T`. The forward hedge fully insulates against this loss; proceeds remain locked at $18,575,615. The put option similarly provides a floor: once `S_T` falls below `K_put`, the put is exercised and floor proceeds are guaranteed net of the $322,759 premium. No hedge is the worst outcome in depreciation scenarios, exposing the full downside.
 
-### If EUR Depreciates  
-- Unhedged loses value  
-- Forward fully protects  
-- Put protects (minus premium)  
+### EUR Appreciation Scenarios (`S_T` > 1.0935)
 
-### If EUR Appreciates  
-- Unhedged performs best  
-- Forward misses upside  
-- Put captures upside  
+When the euro strengthens above the forward rate, the unhedged position and the put option holder both benefit. The put holder lets the option expire worthless and converts at the higher spot (net of the sunk premium). The forward hedge, by contrast, **sacrifices this upside entirely** — the company is obligated to sell EUR at 1.0935 even if the market has moved to 1.15 or higher. This opportunity cost is the defining trade-off of the forward.
+
+| Scenario | Forward Hedge | Put Option Hedge | No Hedge |
+|---|---|---|---|
+| **EUR Depreciates** (`S_T` < `F0`) | ✅ Protected — proceeds locked | ✅ Protected — put exercised, floor applies | ❌ Fully exposed — proceeds decline |
+| **EUR at Parity** (`S_T` = `F0`) | Neutral — same as market | Break-even (premium drag only) | Same as forward result |
+| **EUR Appreciates** (`S_T` > `F0`) | ❌ Opportunity cost — locked below market | ✅ Upside retained (net of premium) | ✅ Upside captured fully |
 
 ---
 
-## D. Strategic Recommendation  
+## D. Strategic Recommendation
 
-### ✅ Recommend: Forward Hedge  
+> **Recommended Strategy: EUR Put Option Hedge (Primary) — Forward Hedge as Fallback**
 
-**Why:**
-- Guarantees **$21,870,000**
-- Eliminates uncertainty  
-- No upfront cost  
-- Aligns with conservative risk management  
+Based on the quantitative analysis in the Stage 2 model and the framework in the Stage 3 specification, I recommend the **EUR put option** as the primary hedging instrument for this receivable.
 
----
+The put option establishes a USD floor of approximately **$22,274,939** (net of the $322,759 premium) while preserving full upside participation if the EUR appreciates above `K_put`. The premium represents roughly **1.9% of the notional EUR position** — a modest cost for protection that retains strategic flexibility. Given current macroeconomic uncertainty around ECB rate policy and EURUSD volatility, paying for optionality is economically justified.
 
-### Alternative (If Bullish EUR):  
-Use **Put Option Hedge** for flexibility and upside participation.
+The forward hedge at **$18,575,615** provides absolute certainty and eliminates model risk entirely, but permanently surrenders any benefit from EUR appreciation. For a company with tight budget constraints and minimal risk tolerance, the forward is defensible — but for a treasury team with a constructive view on EUR or the latitude to accept some variability, the **put is the superior risk-adjusted choice**.
 
 ---
 
-## E. Executive Justification  
+## E. Executive Justification
 
-- **Stability:** Ensures predictable cash flow  
-- **Cost:** Avoids $380K premium  
-- **Risk:** Eliminates downside exposure  
-- **Liquidity:** No borrowing required  
-- **Strategy Fit:** Matches risk-averse treasury goals  
-
----
-
-## F. Structured AI Prompt  
-
-### GOAL  
-Build an Excel FX hedging model.
+| Consideration | Analysis |
+|---|---|
+| **Cash Flow Stability** | The put option guarantees minimum USD proceeds of $22,274,939 — providing a credible floor for cash flow planning and covenant compliance. |
+| **Budget Certainty** | The forward offers the highest budget certainty ($18,575,615 locked), but the put provides a known worst-case floor with upside optionality — superior for most treasury mandates. |
+| **Liquidity Impact** | The put requires only the upfront premium payment of $322,759 (~1.9% of notional). The money market hedge requires significant EUR borrowing, creating balance sheet and liquidity implications that may not be suitable. |
+| **Optionality Value** | Unlike the forward, the put allows full participation in EUR appreciation above the strike. This asymmetric payoff is valuable given current EUR volatility and potential ECB policy shifts. |
+| **Premium Cost** | Total put cost = $322,759 (EUR 16,987,302 × $0.019/EUR). This is a known, bounded cost — superior to the unbounded downside risk of no hedge. |
+| **Accounting (Optional)** | Under ASC 815, the put option may qualify for cash flow hedge accounting if properly designated. Premium amortization flows through OCI until the hedged transaction affects earnings. Documentation requirements should be confirmed with the controller. |
 
 ---
 
-### INPUTS  
+## F. Structured AI Prompt (Appendix)
 
-- FC_AMT = 20000000  
-- S0_in = [spot rate]  
-- F0_in = 1.0935  
-- R_USD = [USD rate]  
-- R_FC = [EUR rate]  
-- K_PUT = S0_in  
-- K_CALL = S0_in  
-- PREM_PUT = 0.019  
-- PREM_CALL = 0.024  
-- T_DAYS = 365  
+The following prompt is designed to allow any AI assistant (e.g., Claude, GPT-4) to regenerate the complete FX hedging spreadsheet from scratch, consistent with the Stage 3 specification and Stage 2 model structure.
+
+```text
+# GOAL
+Create a professional Excel workbook (.xlsx) modeling four FX hedging strategies
+for a EUR-denominated receivable. The model must include named input ranges,
+color-coded sections, a scenario sensitivity table, verification checks, and a
+formatted summary output.
+
+# INPUT VARIABLES
+Use the following named ranges in a yellow-highlighted INPUT section
+(Sheet: 'FX Hedge Model'):
+
+  FC_AMT    = 16,987,302    (EUR receivable, 1 year)
+  S0_in     = [enter current market EURUSD spot at time of use]
+  F0_in     = 1.0935        (1-year EURUSD forward rate)
+  R_USD     = 0.0367        (USD 1-year risk-free rate)
+  R_FC      = 0.03691       (EUR 1-year risk-free rate)
+  K_PUT     = S0_in         (ATM put strike = spot)
+  K_CALL    = S0_in         (ATM call strike = spot)
+  PREM_PUT  = 0.019         (USD per EUR, paid upfront)
+  PREM_CALL = 0.024         (USD per EUR, paid upfront)
+  T_DAYS    = 365           (days to maturity)
+
+# MODEL LOGIC
+Build the following sections with green-highlighted formula cells:
+
+1. FORWARD HEDGE
+   USD_forward = FC_AMT * F0_in
+
+2. MONEY MARKET HEDGE (3-step)
+   [a] EUR_borrow  = FC_AMT / (1 + R_FC)
+   [b] USD_convert = EUR_borrow * S0_in
+   [c] USD_mm      = USD_convert * (1 + R_USD)
+   NOTE: Under correct CIP, USD_mm should ≈ USD_forward.
+
+3. OPTION HEDGES
+   For each S_T in the sensitivity table:
+   Unhedged = FC_AMT * S_T
+   Put_net  = FC_AMT * MAX(S_T, K_PUT) - FC_AMT * PREM_PUT
+   Call_net = FC_AMT * S_T - FC_AMT * PREM_CALL   [reference only]
+
+# SENSITIVITY TABLE
+- S_T range: 0.90 to 1.30, step 0.02 (21 rows)
+- Columns: S_T | Unhedged | Forward | MM Hedge | Put Hedge | Call Hedge
+- Include a multi-line chart: S_T on x-axis, USD proceeds on y-axis
+- All USD values formatted as $#,##0 (zero decimals)
+- Exchange rates formatted to 4 decimal places
+
+# VERIFICATION
+Add a gray-highlighted CHECK section:
+  CIP Parity Check = USD_mm - USD_forward
+  (Should be ~$0 when S0_in is correctly implied by F0_in, R_USD, R_FC)
+  Flag divergence > $10,000 with conditional formatting in red.
+
+# FORMATTING
+  Yellow background  = User input cells
+  Blue background    = Assumption cells
+  Green background   = Formula output cells
+  Gray background    = Summary / output cells
+
+Named ranges must match exactly: FC_AMT, S0_in, F0_in, R_USD, R_FC,
+K_PUT, K_CALL, PREM_PUT, PREM_CALL, T_DAYS.
+Do not invent alternative names.
+
+# EXPORT
+  Filename: FX_Hedge_Model_Scenario4.xlsx
+  Freeze top row and input label column.
+  Include a Summary tab with: strategy name, USD proceeds, certainty level,
+  premium cost, and one-line trade-off note for each of the four strategies.
+```
 
 ---
 
-### MODEL  
+## Extra Credit: Areas for Further Study
 
-**Forward:**  
-USD_forward = FC_AMT × F0_in  
+### 1. AI Skills & Automation
 
-**Money Market:**  
-EUR_borrowed = FC_AMT / (1 + R_FC)  
-USD_today = EUR_borrowed × S0_in  
-USD_mm = USD_today × (1 + R_USD)  
+The structured prompt in Section F represents only the first layer of AI-driven model automation. More powerful applications exist: an AI agent with access to a Bloomberg or Refinitiv data feed could pull live EURUSD spot, forward, and interest rate inputs directly into the model each morning, recalculate all strategy outputs, and distribute an updated executive summary — all without human intervention. Monte Carlo simulation could be layered on top: by sampling from a historical or implied EURUSD distribution (calibrated to current volatility surfaces), the AI could generate probability-weighted expected proceeds under each strategy and compute Value-at-Risk (VaR) at a 95% or 99% confidence level, transforming a static scenario table into a dynamic risk dashboard.
 
-**Options:**  
-USD_unhedged = FC_AMT × S_T  
-USD_put = FC_AMT × MAX(S_T, K_PUT) − FC_AMT × PREM_PUT  
-USD_call = FC_AMT × S_T − FC_AMT × PREM_CALL  
+Claude Skills, in particular, could be configured to act as a treasury assistant: given the Stage 3 spec and current market data, it could regenerate the Excel model, interpret the sensitivity table, draft an updated memo, and flag CIP parity violations — reducing analyst preparation time from hours to minutes.
 
----
+### 2. Multi-File Reasoning & GitHub Version Control
 
-### SENSITIVITY  
+Committing all three stage deliverables — Stage 3 spec (`.md`), Stage 2 model (`.xlsx`), and Stage 4 memo (`.md`) — to a GitHub repository creates a complete, auditable, and reproducible hedge analysis pipeline. An AI assistant with repository access can perform multi-file reasoning: verifying that named ranges in the Excel model match those defined in the Stage 3 spec, or confirming that the Stage 4 recommendation is consistent with Stage 2 outputs. This cross-file consistency check is especially valuable in large organizations where specs, models, and memos are maintained by different teams across different time periods.
 
-- S_T from 0.90 → 1.30  
-- Step = 0.02  
+From an accounting and audit perspective, GitHub commits provide timestamped version history — directly addressing ASC 815 documentation requirements for hedge accounting designation, which must occur at inception and be contemporaneously documented. Each commit becomes an immutable record of what the analyst knew, when they knew it, and what decision was supported by the data at that time, serving as audit-ready evidence in a hedge effectiveness review.
 
 ---
 
-### VERIFICATION  
-
-- USD_forward ≈ USD_mm  
-
----
-
-### OUTPUT  
-
-- Tables  
-- Chart  
-- Break-even  
-
----
-
-## Conclusion  
-
-The forward hedge is the optimal strategy because it delivers certainty, eliminates risk, and avoids unnecessary costs. Options are only justified if the firm expects EUR appreciation.
-
----
+*Prepared by: Mia Herradura | Financial Analyst*  
+*Submitted: May 1, 2026 | Stage 4 — Final Analysis & Recommendation | Scenario 4*
