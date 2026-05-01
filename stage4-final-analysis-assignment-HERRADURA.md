@@ -164,7 +164,6 @@ Do not invent alternative names.
   premium cost, and one-line trade-off note for each of the four strategies.
 
 ---
----
 
 ## **Extra Credit: Areas for Further Study**
 
